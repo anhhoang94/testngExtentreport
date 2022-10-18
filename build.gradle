@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.appium:java-client:8.2.0'
+    implementation 'com.aventstack:extentreports:5.0.9'
+    implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
+    implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
+    implementation group: 'org.testng', name: 'testng', version: '7.6.1'
+    implementation group: "org.seleniumhq.selenium", name: 'selenium-java', version: '4.4.0'
+    implementation group: "commons-io", name: 'commons-io', version: '2.11.0'
+    implementation group: 'org.apache.poi', name: 'poi', version: '5.2.3'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.2'
+    implementation group: "mysql", name: 'mysql-connector-java', version: '8.0.24'
+}
+
+test {
+    useJUnitPlatform()
+}
