@@ -50,7 +50,7 @@ public class TestListener extends BaseTest implements ITestListener {
                 excel.setCellData(timeStamp, (String) iTestResult.getAttribute("testcase"), "ExecuteTime");
                 excel.setCellData("PASS", (String) iTestResult.getAttribute("testcase"), "Status");
             } catch (Exception e) {
-                Log.info("OnTestSuccess exception: "+e);
+                Log.info("onTestSuccess exception: "+e);
                 throw new RuntimeException(e);
             }}
 
@@ -68,7 +68,7 @@ public class TestListener extends BaseTest implements ITestListener {
                 excel.setCellData(timeStamp, (String) iTestResult.getAttribute("testcase"), "ExecuteTime");
                 excel.setCellData("FAIL", (String) iTestResult.getAttribute("testcase"), "Status");
             } catch (Exception e) {
-                System.out.println("OnTestFailure exception: "+e);
+                Log.info("onTestFailure exception:: "+e);
                 throw new RuntimeException(e);
             }
         }
@@ -93,12 +93,6 @@ public class TestListener extends BaseTest implements ITestListener {
             Object testClass = iTestResult.getInstance();
             AndroidDriver driver = ((BaseTest) testClass).getDriver();
 
-            if (driver != null) {
-                System.out.println("driver is not null");
-            } else {
-                System.out.println("driver is null");
-            }
-
             File srcFile=driver.getScreenshotAs(OutputType.FILE);
             String filename= UUID.randomUUID().toString();
             File targetFile=new File("extent-reports/"+ details + filename +".jpg");
@@ -106,7 +100,7 @@ public class TestListener extends BaseTest implements ITestListener {
             String filePath = targetFile.getAbsolutePath();
             getTest().log(status, details, MediaEntityBuilder.createScreenCaptureFromPath(filePath).build());
         } catch (Exception e) {
-            System.out.println("screenshot exception "+details + " :: "+ e);
+            Log.info("screenshot exception:: "+details + " :: "+ e);
         }
     }
 }

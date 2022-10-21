@@ -15,7 +15,7 @@ public class HomePage extends BasePage {
     /**
      * Variables
      */
-    String appPackage = "com.lydecker.timetracking.dev";
+    String appPackage = "com.shootapp";
 
     /**
      * Mobile Elements
@@ -47,7 +47,6 @@ public class HomePage extends BasePage {
         Log.info("Reset App");
         driver.terminateApp(appPackage);
         driver.activateApp(appPackage);
-        ignoreUpdate();
     }
 
     public boolean settingElePresent() {

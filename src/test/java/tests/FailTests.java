@@ -15,9 +15,9 @@ public class FailTests extends BaseTest {
         //ExtentReports Description
         ExtentTest test = startTest(method.getName(), "failTest");
         homePage.screenshot(test,"start app failTest");
-        loginPage.loginToApp("123", "12345678x@X");
         homePage.screenshot(test,"login failTest");
-        assertTrue(homePage.settingElePresent());
+        Log.info("capabilities:: ");
+//        assertTrue(homePage.settingElePresent());
 //        String query1 = "update invoice set status = \"New\" where mat_code = \"10014\"";
 //        stmt.executeUpdate(query1);
 

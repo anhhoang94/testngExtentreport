@@ -28,13 +28,13 @@ public class BaseTest {
     public void cleanReport() throws Exception {
         // Set the test data file
         excel = new ExcelHelpers();
-        File excelFile = new File("./src/test/resources/TestData.xlsx");
+        File excelFile = new File("src/test/resources/TestData.xlsx");
         excelPath = excelFile.getAbsolutePath();
         Log.info("Excel Path: "+excelPath);
 
         // Clean up report folder
         Log.info("Clean up Report!");
-        File dir = new File("./extent-reports");
+        File dir = new File("extent-reports");
         for (File file:dir.listFiles()) {
             file.delete();
         }
@@ -48,17 +48,19 @@ public class BaseTest {
     @BeforeClass
     public void classLevelSetup() throws Exception {
         Log.info("Tests is starting!");
-        File file = new File("./src/test/resources/app-development-release.apk");
-        System.out.println("apk File Path: "+file.getAbsolutePath());
+        File file = new File("src/test/resources/Shoot_Oct17.apk");
+
         UiAutomator2Options caps = new UiAutomator2Options()
                 .setDeviceName("sdk_gphone64_x86_64")
                 .setPlatformVersion("12")
                 .setApp(file.getAbsolutePath())
+                .setLanguage("en")
+                .setLocale("en")
                 .setFullReset(false)
                 .setNoReset(true)
                 .eventTimings();
 
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),caps);
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), caps);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
@@ -69,14 +71,39 @@ public class BaseTest {
         }
     }
 
+    public void setLanguage(String language, String locale) throws Exception {
+        if (driver != null) {
+            Log.info("Quit driver!");
+            driver.quit();
+        }
+
+        Log.info("Set language: "+language+ " locale: "+locale);
+        File file = new File("src/test/resources/Shoot_Oct17.apk");
+
+        UiAutomator2Options caps = new UiAutomator2Options()
+                .setDeviceName("sdk_gphone64_x86_64")
+                .setPlatformVersion("12")
+                .setApp(file.getAbsolutePath())
+                .setLanguage(language)
+                .setLocale(locale)
+                .setFullReset(false)
+                .setNoReset(true)
+                .eventTimings();
+
+        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), caps);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        homePage = new HomePage(driver);
+        loginPage = new LoginPage(driver);
+    }
+
     @BeforeMethod
     public void methodLevelSetup() {
-        System.out.println("BeforeMethod: ");
+        Log.info("BeforeMethod: ");
     }
 
     @AfterMethod
     public void methodLevelTeardown() {
-        System.out.println("AfterMethod: ");
+        Log.info("AfterMethod: ");
     }
 
     @AfterClass
